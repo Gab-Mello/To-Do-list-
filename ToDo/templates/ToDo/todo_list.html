@@ -59,8 +59,8 @@
 
 {% else %}
 <h1>Bem vindo!</h1>
-<a href="{% url 'login' %}" class="btn btn-primary btn-sm">Cadastrar</a>
-<a href="#" class="btn btn-primary btn-sm">Editar</a>
+<a href="{% url 'register' %}" class="btn btn-primary btn-sm">Cadastrar</a>
+<a href='{% url "login" %}' class="btn btn-primary btn-sm">Entrar</a>
 
 {% endif %}
    

@@ -67,11 +67,10 @@ def registro(request):
             login(request,user)
             return redirect('home')
         else:
-            form = RegistroForm()
-            return render(request,'registration/registro.html',{'form': form})
+            print('deu erro')
     else:
         form = RegistroForm()
-        return render(request,'registration/registro.html',{'form': form})
+    return render(request,'registration/registro.html',{'form': form})
 
 
 

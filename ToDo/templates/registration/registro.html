@@ -1,5 +1,9 @@
 {% extends "registration/base.html" %}
 
+{% block title %}
+<title>register</title>
+{% endblock title %}
+
 {% block content %}
 
 <div class="mb-3">
@@ -18,8 +22,8 @@
         </div>
         <div class="mb-3">
             <label for="password2" class="form-label">Confirm password:</label>
-            {{ form.password2.errors }}
             {{form.password2}}
+            {{ form.password2.errors }}
         </div>
 
         <div class="mb-3">

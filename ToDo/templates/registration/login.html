@@ -1,5 +1,9 @@
 {% extends "registration/base.html" %}
 
+{% block title %}
+<title>login</title>
+{% endblock title %}
+
 {% block content %}
 
 <div class="mb-3">
@@ -8,12 +12,19 @@
         {% csrf_token %}
         <div class="mb-3">
             <label for="username" class="form-label">Username:</label>
-            <input type="text" class="form-control" id="username" placeholder="username" name="username">
-        </div>
+            {{form.username.errors}}
+            {{form.username}}
         <div class="mb-3">
             <label for="password" class="form-label">Password:</label>
-            <input type="text" class="form-control" id="password" placeholder="password" name="password">
+            {{form.password.errors}}
+            {{form.password}}
         </div>
+
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                Nome de usuário ou senha incorretos. Por favor, tente novamente.
+            </div>
+        {% endif %}
         <div class="mb-3">
             <button type="submit" class="btn btn-success mt-2">Salvar</button>
         </div>
