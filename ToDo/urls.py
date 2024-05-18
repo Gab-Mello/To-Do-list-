@@ -11,4 +11,6 @@ urlpatterns = [
     path('delete/<int:pk>',views.todo_delete, name='delete'),
     path('complete/<int:pk>',views.todo_complete, name='complete'),
     path('delete_all/',views.todo_delete_all, name='delete_all'),
+    path('registro/',views.registro, name='registro'),
+    
 ]

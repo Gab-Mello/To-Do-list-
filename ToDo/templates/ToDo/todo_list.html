@@ -14,46 +14,56 @@
         </div>
     </nav>
 
-    <main class='container'>
-        <h1>Lista de Tarefas</h1>
-        {% if tarefas %}
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Titulo</th>
-                <th scope="col">Criado em</th>
-                <th scope="col">Data de entrega</th>
-                <th scope="col">Finalizado em</th>
-                <th scope="col">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for tarefa in tarefas %}
-                    <tr>
-                        <td>{{tarefa.title}}</td>
-                        <td>{{tarefa.created_at}}</td>
-                        <td>{{tarefa.deadline}}</td>
-                        <td>{{tarefa.finished_at|default:"-"}}</td>
-                        <td>
-                            <a href="{% url "complete" tarefa.id %}" class="btn btn-success btn-sm">Concluir</a>
-                            <a href="{% url 'delete' tarefa.id %}" class="btn btn-danger btn-sm">Excluir</a>
-                            <a href="{% url 'edit' tarefa.id %}" class="btn btn-primary btn-sm">Editar</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-            
-          </table>
-          {% else %}
-          <p>Não há tarefas</p>
-        {% endif %}
-        <a href='{% url "new_task" %}'class='btn btn-primary'>Nova tarefa</a>
-        {% if tarefas %}
-        <a href='{% url "delete_all" %}'class='btn btn-danger'>Limpar lista</a>
-        {% endif %}
-        
-    </main>
 
+{% if user.is_authenticated %}
+
+<main class='container'>
+  <h1>Lista de Tarefas</h1>
+  {% if tarefas %}
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Titulo</th>
+          <th scope="col">Criado em</th>
+          <th scope="col">Data de entrega</th>
+          <th scope="col">Finalizado em</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for tarefa in tarefas %}
+              <tr>
+                  <td>{{tarefa.title}}</td>
+                  <td>{{tarefa.created_at}}</td>
+                  <td>{{tarefa.deadline}}</td>
+                  <td>{{tarefa.finished_at|default:"-"}}</td>
+                  <td>
+                      <a href="{% url "complete" tarefa.id %}" class="btn btn-success btn-sm">Concluir</a>
+                      <a href="{% url 'delete' tarefa.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                      <a href="{% url 'edit' tarefa.id %}" class="btn btn-primary btn-sm">Editar</a>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+      
+    </table>
+    {% else %}
+    <p>Não há tarefas</p>
+  {% endif %}
+  <a href='{% url "new_task" %}'class='btn btn-primary'>Nova tarefa</a>
+  {% if tarefas %}
+  <a href='{% url "delete_all" %}'class='btn btn-danger'>Limpar lista</a>
+  {% endif %}
+  
+</main>
+
+{% else %}
+<h1>Bem vindo!</h1>
+<a href="{% url 'login' %}" class="btn btn-primary btn-sm">Cadastrar</a>
+<a href="#" class="btn btn-primary btn-sm">Editar</a>
+
+{% endif %}
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
