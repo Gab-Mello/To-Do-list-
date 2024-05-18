@@ -10,16 +10,32 @@
     <nav class="navbar bg-dark mb-4" data-bs-theme="dark">
       <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'home' %}">ToDo</a>
+
+    {% if user.is_authenticated %}
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        {{user.username}}
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <form method="post" action="{% url 'logout' %}" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="dropdown-item" style="background: none; padding: 2; margin: 2;">Logout</button>
+          </form>
+      </li>
+      
+      </ul>
+    </div>
+    {% endif %}
       </div>
   </nav>
   <main class='container'>
     <h1>Criar tarefa</h1>
-
     <form method="POST" action='{% url "new_task" %}'>
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit" class='btn btn-success'>Salvar</button>
-      <a href='{% url "home" %}'class='btn btn-primary' >Voltar</a>
+      <a href='{% url "home" %}'class='btn btn-primary'>Voltar</a>
     </form>
     
   </main>

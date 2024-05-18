@@ -3,6 +3,7 @@ from .models import Todo
 from .forms import TodoForm, RegistroForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+
 # Create your views here.
 
 

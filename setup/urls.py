@@ -6,5 +6,4 @@ urlpatterns = [
     path('',include('ToDo.urls')),
     path('accounts/',include('django.contrib.auth.urls')),
     path('accounts/',include('ToDo.urls')),
-
 ]
