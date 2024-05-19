@@ -3,19 +3,23 @@ from .models import Todo
 from .forms import TodoForm, RegistroForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 
 def todo_list(request):
-    tarefas = Todo.objects.all()
-    return render(request,'ToDo/todo_list.html',{'tarefas': tarefas})
+    if request.user.is_authenticated:    
+        tarefas = request.user.tarefas.all()
+        return render(request,'ToDo/todo_list.html',{'tarefas': tarefas})
+    return render(request,'ToDo/todo_list.html')
 
 @login_required
 def todo_create(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
         if form.is_valid():
+            form.instance.user = request.user
             form.save()
             return redirect('home')
     else:
